@@ -27,7 +27,9 @@ Committed before labeling began (`evals/annotation-readiness-criteria.md` +
 - **Denominators:** core_values 53, status_accuracy **51** (2 pre-registered
   skips: R3 Pearl, R7 Patty — their calls never reached a log), escalation 53
   plus an S-category subset row. A label recorded on a skip item is excluded;
-  the denominator does not move after the fact.
+  the denominator does not move after the fact. In the published `pairs.csv`
+  this row (R3 Pearl, `status_accuracy`) carries `excluded=1`; dropping
+  blank-label rows and excluded rows reproduces the results table exactly.
 - **Tie-break:** "when in doubt, score 1" — biases toward agreeing with a
   lenient judge, making observed disagreement more credible and the agreement
   number an **upper bound**.
@@ -156,4 +158,4 @@ Raw pairs: `evals/agreement/pairs.csv` — published here as
 
 The export scripts run against the production repo, which is private; the
 published `pairs.csv` is sufficient to recompute every statistic in the results
-table.
+table after dropping blank-label rows and rows flagged `excluded=1`.
