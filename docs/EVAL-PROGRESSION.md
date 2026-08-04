@@ -109,9 +109,20 @@ Held throughout, across every era: **0% PII leak. 100% escalation recall.** Thos
 
 ## The judge
 
-The judge is a **different model family** from the agent it scores.
+**The deployed judge is same-family: GPT-4o grading GPT-4.1.** Same vendor, same
+lineage. That is a real limitation of this system and I'd rather name it than
+imply otherwise.
 
-This is not bookkeeping. A same-family judge inherits the agent's blind spots and phrasing preferences and reliably approves output a different model, or a human, would flag. The pass rate rises and the product does not improve.
+The concern with same-family judging is that the judge inherits the agent's
+blind spots and phrasing preferences, and approves output a different model — or
+a human — would flag. The pass rate rises and the product does not improve.
+
+So rather than assert the judge is fine, I measured it against a human on a
+labelled sample. That is the [agreement study](agreement-study-2026-07-30.md)
+below: the shipped judge agrees with a human rater at **AC1 0.958 / 0.843 /
+1.000** across three dimensions, and where the two differ the judge is
+**lenient**, not random — which is the direction a same-family judge is
+theoretically expected to fail in, now with a number on it.
 
 There's a worse version I've seen described as a feature: tuning the judge against the agent's observed behaviour so the two "co-optimize." That isn't a feedback loop, it's a machine for producing the number you wanted.
 
@@ -119,13 +130,53 @@ Deterministic checks sit alongside the graded ones. Anything a regex can decide 
 
 ---
 
-## What I still don't have
+## Era 5 — grading the judge
 
-**A judge-versus-human agreement statistic.** Judges are calibrated against human verdicts on a weekly cadence, but I have never computed Cohen's kappa across a labelled sample. Until I do, every pass rate here carries an asterisk and I'd rather say so than not.
+Every number above is a judge grading an agent with nobody grading the judge.
+On 2026-07-30 I hand-labelled all 53 scenarios blind and compared.
 
-Kappa rather than raw agreement, because raw agreement is inflated by class imbalance: if 95% of turns pass, a judge that says "pass" to everything scores 95% agreement while carrying zero information. Kappa puts that judge at 0.0, which is the truth.
+**Full study: [docs/agreement-study-2026-07-30.md](agreement-study-2026-07-30.md)** ·
+raw label pairs: [`docs/agreement/pairs.csv`](agreement/pairs.csv)
 
-The calculation is built into [crisp-eval](https://github.com/Arash-yazdani/crisp-eval) and running it is next.
+| Dimension | n | observed agreement | Gwet's AC1 [95% CI] |
+|---|---|---|---|
+| core_values | 50 | 96.0% | **0.958** [0.890, 1.000] |
+| status_accuracy | 51 | 86.3% | **0.843** [0.703, 0.938] |
+| escalation_handling | 49 | 100% | **1.000** [1.000, 1.000] |
+
+Three things this produced that the pass rates could not.
+
+**Kappa did the opposite of what I predicted.** What this doc said before the
+study ran, verbatim:
+
+> Kappa rather than raw agreement, because raw agreement is inflated by class
+> imbalance: if 95% of turns pass, a judge that says "pass" to everything scores
+> 95% agreement while carrying zero information. Kappa puts that judge at 0.0,
+> which is the truth.
+
+The reasoning is right and the conclusion is wrong. On real data the imbalance
+was severe enough to break kappa itself: at 96–98% pass on both margins the
+chance-agreement term exceeds 0.96, kappa's denominator collapses, and it lands
+**negative** (−0.020, −0.035) with up to 13% of bootstrap replicates undefined —
+on the same tables that yield AC1 0.958. That is the Feinstein–Cicchetti
+paradox, and it is why Gwet's AC1 was pre-registered as primary before any
+labelling started. Quoted rather than quietly deleted.
+
+**The judge is lenient, one-sidedly.** In 7 of 9 disagreements the judge passed
+a call the human failed — concentrated on `logged_status` for adversarial
+probes. The human sided with the suite's expectation against the model's
+logging, which turns the long-standing "I-category at 60%" from a
+suite-vs-model argument into a human-validated defect.
+
+**It validates the judge's pass behaviour and almost nothing else.** The
+both-fail cell is **empty in every dimension** — the two raters never once
+agreed a call failed. With failure that rare, this cannot distinguish a
+slightly-lenient judge from one blind to a rare failure mode. A
+failure-enriched replication is the follow-up, not a victory lap.
+
+Single rater, who also built the system and wrote the rubric, on synthetic
+transcripts, with a tie-break that biases toward agreement. **These are upper
+bounds**, and the study says so in its own limitations section.
 
 ---
 
