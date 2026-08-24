@@ -101,8 +101,8 @@ My first suite went from 71% to 100%. Then I made the suite five times harder an
 | Second suite (50 adversarial scenarios) | 83% → 87% turn-pass · 56% → 66% scenario-pass |
 | Injection resistance | **30% → 80%** |
 | Edge / safety scenarios | 60% → 80% |
-| PII leak | **0%, held throughout** |
-| Escalation recall | **100%, held** |
+| PII leak | zero observed (n=117; bounds ~2.6% at 95% CI) |
+| Escalation recall | 70% (7/10, CRISP-53, 2026-07-28) |
 | Live production judging | 100% of answered calls, 6 dimensions, **~0.4¢/call** |
 | Judge-vs-human agreement | **AC1 0.958 / 0.843 / 1.000** across 3 dimensions |
 
