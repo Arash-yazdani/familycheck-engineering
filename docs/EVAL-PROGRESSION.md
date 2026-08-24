@@ -39,7 +39,7 @@ New suite, five categories, ten scenarios each. Same agent.
 
 | | Baseline | After hardening |
 |---|---|---|
-| Turn-pass | 83% (112/134) | 87% |
+| Turn-pass | 84% (112/134) | 87% |
 | Scenario-pass | 56% (28/50) | 66% (33/50) |
 
 The agent had not got worse. **The suite had got honest.**
