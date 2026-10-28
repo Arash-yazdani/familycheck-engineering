@@ -70,7 +70,7 @@ Because I had the breakdown I could go find it. The dips clustered on happy-path
 
 **The lesson isn't "categorise your scenarios."** It's that an aggregate pass rate cannot distinguish a tradeoff you chose from a bug you introduced, and those need opposite responses.
 
-Also added in this pass: a deterministic emergency path, prompted by a live call that exposed the gap. Found in production, fixed in the suite, can't recur.
+Also added in this pass: a deterministic emergency path, prompted by a live call that exposed the gap. Found on a live test call, fixed in the suite, can't recur.
 
 ---
 
@@ -84,7 +84,7 @@ The eval is what made that visible. Without it, the cost saving would have looke
 
 ---
 
-## Era 4: live production judging
+## Era 4: live judging in private beta
 
 Every answered call is now judged on six dimensions plus deterministic safety keys, at roughly **0.4 cents per call.**
 
@@ -120,7 +120,7 @@ The judge is a **separate model** from the agent it scores: `gpt-4o` grading a `
 
 A same-family judge inherits the agent's blind spots and phrasing preferences and reliably approves output a different model, or a human, would flag. The pass rate rises and the product does not improve. **That risk applies to my own setup**, and it applies most to the claim I would least like to be wrong about: a same-family judge is likeliest to miss exactly the leak phrasings a same-family generator finds natural.
 
-`crisp-eval` enforces this correctly and **would reject my production configuration**:
+`crisp-eval` enforces this correctly and **would reject my deployed configuration**:
 
 ```python
 >>> Judge(my_judge, model="gpt-4o", agent_model="gpt-4.1")
@@ -137,11 +137,7 @@ Deterministic checks sit alongside the graded ones. Anything a regex can decide 
 
 ## What I still don't have
 
-**A judge-versus-human agreement statistic.** Judges are calibrated against human verdicts on a weekly cadence, but I have never computed Cohen's kappa across a labelled sample. Until I do, every pass rate here carries an asterisk and I'd rather say so than not.
-
-Kappa rather than raw agreement, because raw agreement is inflated by class imbalance: if 95% of turns pass, a judge that says "pass" to everything scores 95% agreement while carrying zero information. Kappa puts that judge at 0.0, which is the truth.
-
-The calculation is built into [crisp-eval](https://github.com/Arash-yazdani/crisp-eval) and running it is next.
+**A failure-enriched judge-versus-human replication.** The [2026-07-30 agreement study](agreement-study-2026-07-30.md) pre-registered Gwet's AC1 as primary, because kappa degenerates when nearly every item passes. The judge scored AC1 0.958 / 0.843 / 1.000, but it passed all 7 transcripts I failed, and a judge that passed everything would score 0.980 / 0.868 / 1.000 on the same labels. So the study supports the judge's pass decisions only. Until a failure-enriched set, labeled by someone other than me and reported as sensitivity and specificity, says otherwise, every pass rate here carries an asterisk and I'd rather say so than not.
 
 ---
 

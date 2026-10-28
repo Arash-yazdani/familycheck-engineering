@@ -1,6 +1,6 @@
 # FamilyCheck: engineering case study
 
-A production voice AI agent that places real phone calls, classifies what it hears, and alerts a human when something is wrong.
+A voice AI agent in private beta that places real phone calls, classifies what it hears, and alerts a human when something is wrong.
 
 **The source is private.** This repo is the case study: architecture, the decisions behind it, what the evaluation numbers actually did over five months, and the two pieces I extracted and open sourced.
 
@@ -79,7 +79,7 @@ The general lesson: when a second agent's definition of success is a different q
 - The assistant refuses to disclose phone numbers, account identifiers, or internal IDs, enforced as a test assertion rather than prompt text
 - A deterministic emergency path, added after a live call exposed the gap
 - Traces are PII-redacted before they leave the system, because patient data does not belong in an observability tool
-- TCR-verified A2P 10DLC registration, live in production
+- TCR-verified A2P 10DLC registration, approved and live
 
 The pattern worth naming: **a guardrail that isn't wired to something that fails a build is a wish.** Every safety property above is bound to a check that blocks a release.
 
@@ -102,9 +102,9 @@ My first suite went from 71% to 100%. Then I made the suite five times harder an
 | Injection resistance | **30% → 80%** |
 | Edge / safety scenarios | 60% → 80% |
 | PII leak | **0%, held throughout** |
-| Escalation recall | **100%, held** |
-| Live production judging | 100% of answered calls, 6 dimensions, **~0.4¢/call** |
-| Judge-vs-human agreement | **AC1 0.958 / 0.843 / 1.000** across 3 dimensions |
+| Escalation recall | 7/10 (70%), CRISP-53 run of 2026-07-28 |
+| Live judging (private beta) | every answered call, 6 dimensions, **~0.4¢/call** |
+| Judge-vs-human agreement | **AC1 0.958 / 0.843 / 1.000** across 3 dimensions; always-pass baseline 0.980 / 0.868 / 1.000; 0 of 7 failures caught |
 
 A 100% pass rate on a suite you wrote, graded by a judge you wrote, means the suite is saturated, not that the agent is correct. The 50-scenario suite is where the real work started.
 
@@ -116,7 +116,7 @@ Every number above is a judge grading an agent. **FamilyCheck's deployed judge i
 
 Observed agreement **96.0% / 86.3% / 100%**, Gwet's AC1 **0.958 / 0.843 / 1.000**. Where the two differ the judge is **lenient, one-sidedly**: 7 of 9 disagreements are the judge passing a call the human failed. Cohen's kappa went *negative* on the same tables, which is the kappa paradox on real data and exactly why AC1 was pre-registered as primary.
 
-The both-fail cell is empty in every dimension, so this validates the judge's *pass* behaviour and barely touches its *fail* behaviour. Single rater who built the system, synthetic transcripts, lenient tie-break: **upper bounds, stated as such**.
+The both-fail cell is empty in every dimension: the judge caught 0 of the 7 transcripts I failed, and a judge that passed everything would score AC1 0.980 / 0.868 / 1.000 on the same labels. So this covers the judge's *pass* behaviour and barely touches its *fail* behaviour. Single rater who built the system, synthetic transcripts, lenient tie-break: **upper bounds, stated as such**.
 
 **Study: [docs/agreement-study-2026-07-30.md](docs/agreement-study-2026-07-30.md)** · raw label pairs: [`docs/agreement/pairs.csv`](docs/agreement/pairs.csv)
 

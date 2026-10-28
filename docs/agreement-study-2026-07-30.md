@@ -41,7 +41,7 @@ Committed before labeling began (`evals/annotation-readiness-criteria.md` +
 
 **Substrate.** 53 blinded, prod-shaped examples (dataset
 `familycheck-agreement-53`), one per CRISP-53 scenario, rendered exactly as
-production renders a call: redacted transcript, `logged_status`,
+the deployed system renders a call: redacted transcript, `logged_status`,
 `final_turn_shape`, tool-only turns omitted with a verdict-free end-marker.
 No titles, verdicts, expected statuses, or category labels anywhere in the
 payload, asserted by a leak-token grep on the live payloads, per entry, by
