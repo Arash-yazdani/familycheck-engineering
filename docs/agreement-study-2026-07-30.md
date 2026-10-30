@@ -39,7 +39,7 @@ Committed before labeling began (`evals/annotation-readiness-criteria.md` +
 
 ## Method
 
-**Substrate.** 53 blinded, prod-shaped examples (dataset
+**Substrate.** 53 blinded examples (dataset
 `familycheck-agreement-53`), one per CRISP-53 scenario, rendered exactly as
 the deployed system renders a call: redacted transcript, `logged_status`,
 `final_turn_shape`, tool-only turns omitted with a verdict-free end-marker.
@@ -58,7 +58,7 @@ item in a LangSmith annotation queue (`crisp-53-agreement`), instructions v2
 rule stated score-neutrally, blank-vs-doubt boundary drawn). Queue completed
 53/53.
 
-**Judge arm.** The *shipped* instrument, not a reimplementation: the prod
+**Judge arm.** The *shipped* instrument, not a reimplementation: the
 `crisp_judge` hub prompt (`eval_crisp_judge_0t8z6ws5`, same 5,863-char
 template, same structured-output schema, gpt-4o, temperature 0) executed by
 LangSmith's hosted evaluator over runs carrying the identical blinded
@@ -137,7 +137,7 @@ Two observations:
 - **Single rater who built the system and wrote the rubric.** Agreement here
   is an upper bound on what an independent rater would produce.
 - **Synthetic transcripts** (mock conversations, no transcriber in the loop),
-  a census of the 53-scenario suite, not a sample from production traffic.
+  a census of the 53-scenario suite, not a sample of private-beta calls.
 - **Tiny failure cells** (b+c ≤ 7 per dimension, d = 0): the study cannot
   distinguish a judge that is slightly lenient from one that is blind to a
   rare failure mode.
@@ -170,7 +170,7 @@ Raw pairs: `evals/agreement/pairs.csv`, published here as
 `scripts/set_agreement_rubric.py`. Sessions: `crisp-53-agreement-labeling`
 (human), `crisp-53-agreement-judge[-r2]` (judge; rules deleted after use).
 
-The export scripts run against the production repo, which is private; the
+The export scripts run against the product repo, which is private; the
 published `pairs.csv` is sufficient to recompute every **point estimate** in
 the results table (the cells, n, both pass rates, p_o, κ, AC1 and PABAK)
 after dropping rows with a blank `judge` or `human` label and rows flagged

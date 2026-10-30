@@ -66,7 +66,7 @@ The category view says something specific: **the safety-critical categories clim
 
 That is a tradeoff I chose, and it is only visible per category. Tracking the aggregate alone, I'd have read the −30 as noise.
 
-Because I had the breakdown I could go find it. The dips clustered on happy-path calls and traced to a benign closing pattern (the agent ending on a tool call with no spoken content) that the judge was scoring as dead air. Not a warmth regression at all. An artifact. A redesigned system-owned sign-off removed it, and production scores those categories clean.
+Because I had the breakdown I could go find it. The dips clustered on happy-path calls and traced to a benign closing pattern (the agent ending on a tool call with no spoken content) that the judge was scoring as dead air. Not a warmth regression at all. An artifact. A redesigned system-owned sign-off removed it, and private-beta calls score those categories clean.
 
 **The lesson isn't "categorise your scenarios."** It's that an aggregate pass rate cannot distinguish a tradeoff you chose from a bug you introduced, and those need opposite responses.
 
