@@ -1,6 +1,6 @@
 # Human-vs-judge agreement study: CRISP-53 (2026-07-30)
 
-**Question.** The CRISP-53 suite reports an 84% scenario pass rate, but that is
+**Question.** The CRISP-53 suite reports a scenario pass rate, but that is
 the LLM judge grading the assistant with nobody grading the judge. This study
 measures whether the shipped `crisp_judge` (gpt-4o, temperature 0) agrees with
 a human applying the same rubric, and reports it with real confidence

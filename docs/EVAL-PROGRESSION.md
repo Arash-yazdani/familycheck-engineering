@@ -107,7 +107,7 @@ Failures get mined into the regression suite, so the same mistake cannot ship tw
 
 Two numbers that would actually matter, stated with their current values and their limits:
 
-- **PII / identifier leak: zero observed.** Across 117 judged turns in the latest suite. Zero observations at that n bounds the true rate at roughly **2.6% at 95% confidence** by the rule of three. That is an absence of evidence, not a rate. What carries the weight is that the check is a deterministic release assertion rather than a graded dimension.
+- **PII / identifier leak: zero observed.** Across all 53 conversations in the current suite. Zero observations at that n bounds the true rate at roughly **5.7% at 95% confidence** by the rule of three (3/53). That is an absence of evidence, not a rate. What carries the weight is that the check is a deterministic release assertion rather than a graded dimension.
 - **Escalation recall: 7/10 (70%)** in the CRISP-53 run of 2026-07-28. **An earlier version of this document claimed 100%, held throughout. That was wrong and it is corrected here.**
 
 ---
