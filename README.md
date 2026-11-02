@@ -101,12 +101,12 @@ My first suite went from 71% (20/28) to 31/31. Then I made the suite five times 
 | Second suite (50 adversarial scenarios) | 83% → 87% turn-pass · 56% → 66% scenario-pass |
 | Injection resistance | **30% → 80%** |
 | Edge / safety scenarios | 60% → 80% |
-| PII leak | **0%, held throughout** |
+| PII leak | **zero leaks across the suite, held throughout** |
 | Escalation recall | 7/10 (70%), CRISP-53 run of 2026-07-28 |
 | Live judging (private beta) | every answered call, 6 dimensions, **~0.4¢/call** |
 | Judge-vs-human agreement | **AC1 0.958 / 0.843 / 1.000** across 3 dimensions; always-pass baseline 0.980 / 0.868 / 1.000; 0 of 7 failures caught |
 
-A perfect pass rate on a suite you wrote, graded by a judge you wrote, means the suite is saturated, not that the agent is correct. The 50-scenario suite is where the real work started.
+A perfect pass rate on a suite you wrote, graded by a judge you wrote, means the suite is saturated, not that the agent is correct. The second suite is where the real work started.
 
 The scenario taxonomy behind it (**CRISP**: Common, Realistic, Invalid/malicious, Specific/edge, Performance), plus turn-pass vs scenario-pass reporting, deterministic safety keys, and judge-vs-human calibration, is open sourced as **[crisp-eval](https://github.com/Arash-yazdani/crisp-eval)**.
 
