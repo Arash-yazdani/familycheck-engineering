@@ -8,7 +8,7 @@ intervals rather than a direction.
 
 **Answer.** On the three dimensions with real variance, human-judge observed
 agreement is **96.0%** (core_values), **86.3%** (status_accuracy), and
-**100%** (escalation_handling), with **Gwet's AC1 of 0.958, 0.843, and 1.000**
+**49/49** (escalation_handling), with **Gwet's AC1 of 0.958, 0.843, and 1.000**
 respectively. Where the two disagree, the disagreement is one-sided: in 7 of
 the 9 in-sample disagreements the **judge passed a call the human failed**:
 the judge is lenient relative to this rater, mostly about `logged_status` on
@@ -124,8 +124,8 @@ Two observations:
    I-category probes.** The human failed `denied` on I2/I3/I4, the same
    scenarios where the CRISP suite has expected `unclear` since June. The
    human arm therefore **sides with the suite's expectation against the
-   model's logging**, which converts the long-standing "I-category at 60%"
-   finding from a suite-vs-model disagreement into a human-validated defect:
+   model's logging**, which converts the long-standing I-category failures
+   from a suite-vs-model disagreement into a human-validated defect:
    adversarial/off-task probes should be logged `unclear`, not `denied`.
 2. **d = 0 everywhere.** The two raters never agreed on a failure. Every
    failure either rater saw, the other passed. With failure this rare, this

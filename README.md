@@ -91,13 +91,13 @@ Full write-up: **[docs/EVAL-PROGRESSION.md](docs/EVAL-PROGRESSION.md)**
 
 The short version, because it's the least flattering and most useful part:
 
-My first suite went from 71% to 100%. Then I made the suite five times harder and the score fell to 56%.
+My first suite went from 71% (20/28) to 31/31. Then I made the suite five times harder and the score fell to 56%.
 
 **The second number was worth more.**
 
 | | |
 |---|---|
-| First suite (10 scenarios) | 71% → 100% turn-pass |
+| First suite (10 scenarios) | 71% (20/28) → 31/31 turn-pass |
 | Second suite (50 adversarial scenarios) | 83% → 87% turn-pass · 56% → 66% scenario-pass |
 | Injection resistance | **30% → 80%** |
 | Edge / safety scenarios | 60% → 80% |
@@ -106,7 +106,7 @@ My first suite went from 71% to 100%. Then I made the suite five times harder an
 | Live judging (private beta) | every answered call, 6 dimensions, **~0.4¢/call** |
 | Judge-vs-human agreement | **AC1 0.958 / 0.843 / 1.000** across 3 dimensions; always-pass baseline 0.980 / 0.868 / 1.000; 0 of 7 failures caught |
 
-A 100% pass rate on a suite you wrote, graded by a judge you wrote, means the suite is saturated, not that the agent is correct. The 50-scenario suite is where the real work started.
+A perfect pass rate on a suite you wrote, graded by a judge you wrote, means the suite is saturated, not that the agent is correct. The 50-scenario suite is where the real work started.
 
 The scenario taxonomy behind it (**CRISP**: Common, Realistic, Invalid/malicious, Specific/edge, Performance), plus turn-pass vs scenario-pass reporting, deterministic safety keys, and judge-vs-human calibration, is open sourced as **[crisp-eval](https://github.com/Arash-yazdani/crisp-eval)**.
 
@@ -114,7 +114,7 @@ The scenario taxonomy behind it (**CRISP**: Common, Realistic, Invalid/malicious
 
 Every number above is a judge grading an agent. **FamilyCheck's deployed judge is same-family (GPT-4o grading GPT-4.1)**, so rather than assert it was fine, I hand-labelled all 53 scenarios blind and measured.
 
-Observed agreement **96.0% / 86.3% / 100%**, Gwet's AC1 **0.958 / 0.843 / 1.000**. Where the two differ the judge is **lenient, one-sidedly**: 7 of 9 disagreements are the judge passing a call the human failed. Cohen's kappa went *negative* on the same tables, which is the kappa paradox on real data and exactly why AC1 was pre-registered as primary.
+Observed agreement **96.0% / 86.3% / 49 of 49**, Gwet's AC1 **0.958 / 0.843 / 1.000**. Where the two differ the judge is **lenient, one-sidedly**: 7 of 9 disagreements are the judge passing a call the human failed. Cohen's kappa went *negative* on the same tables, which is the kappa paradox on real data and exactly why AC1 was pre-registered as primary.
 
 The both-fail cell is empty in every dimension: the judge caught 0 of the 7 transcripts I failed, and a judge that passed everything would score AC1 0.980 / 0.868 / 1.000 on the same labels. So this covers the judge's *pass* behaviour and barely touches its *fail* behaviour. Single rater who built the system, synthetic transcripts, lenient tie-break: **upper bounds, stated as such**.
 

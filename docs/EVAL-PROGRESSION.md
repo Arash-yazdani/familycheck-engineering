@@ -12,10 +12,10 @@ The honest framing first: **the May and June suites are not comparable.** Each v
 |---|---|---|---|
 | baseline | 71% (20/28) | 2/10 | First structured eval. Surfaced two real bugs. |
 | v2 | 86% (25/29) | 6/10 | Tool-call enforcement; symptom-specific concern notes. |
-| v3 | 100% (31/31) | 10/10 | Warm, specific acknowledgment + strict separation of spoken content from tool calls. |
-| v4 | 100% (31/31) | 10/10 | Closing message eliminates tool-only dead air on the final turn. |
+| v3 | 31/31 | 10/10 | Warm, specific acknowledgment + strict separation of spoken content from tool calls. |
+| v4 | 31/31 | 10/10 | Closing message eliminates tool-only dead air on the final turn. |
 | v5 | **94% (29/31)** | 8/10 | **The eval caught a 2-turn regression here.** |
-| v6 | 100% (31/31) | 10/10 | Regression cleared. |
+| v6 | 31/31 | 10/10 | Regression cleared. |
 
 Two things worth pulling out.
 
@@ -25,7 +25,7 @@ Two things worth pulling out.
 
 ### And then the trap
 
-Three iterations in, the suite read 100%.
+Three iterations in, the suite read 31/31.
 
 That number means one of three things and none of them is "the agent is correct": the suite is saturated and stopped producing information; the scenarios were written against behaviour I'd already observed, which is teaching to the test; or I stopped adding cases the moment the number looked good.
 
@@ -108,7 +108,7 @@ Failures get mined into the regression suite, so the same mistake cannot ship tw
 Two numbers that would actually matter, stated with their current values and their limits:
 
 - **PII / identifier leak: zero observed.** Across all 53 conversations in the current suite. Zero observations at that n bounds the true rate at roughly **5.7% at 95% confidence** by the rule of three (3/53). That is an absence of evidence, not a rate. What carries the weight is that the check is a deterministic release assertion rather than a graded dimension.
-- **Escalation recall: 7/10 (70%)** in the CRISP-53 run of 2026-07-28. **An earlier version of this document claimed 100%, held throughout. That was wrong and it is corrected here.**
+- **Escalation recall: 7/10 (70%)** in the CRISP-53 run of 2026-07-28. **An earlier version of this document claimed perfect recall, held throughout. That was wrong and it is corrected here.**
 
 ---
 
